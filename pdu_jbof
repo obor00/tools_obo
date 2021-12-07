@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cat <<- EOF | sshpass -p LA2405wg ssh hudson@pdu-6 
+
+set PDU.OutletSystem.Outlet[15].DelayBeforeShutdown 0
+
+EOF
+
+sleep 2

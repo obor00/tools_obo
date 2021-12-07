@@ -1,0 +1,19 @@
+#!/bin/bash
+
+cat <<- EOF | sshpass -p LA2405wg ssh hudson@pdu-6 
+
+#local cmd=""
+#local mytty="$(tty)"
+
+#while [ "${cmd/*pdu#0/FOUND>}" != "FOUND" ] ; do
+    #cmd=$(timeout 10 cat  < $mytty )
+    #sleep 1
+    #echo "read $cmd"
+#done
+sleep 5
+echo "set PDU.OutletSystem.Outlet[15].DelayBeforeShutdown 0"  > $mytty
+sleep 3
+echo "set PDU.OutletSystem.Outlet[15].DelayBeforeStartup 0"  > $mytty
+sleep 3
+
+quit

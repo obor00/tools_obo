@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+export INTEGRATION_BRANCH=dev/obordes/tmp
+export ARTIFACT_PATH=$(pwd)/artifacts
+
+source workspace/kEnv/kvxtools/.switch_env
+
+export TEST_LEVEL=short
+#./valid/get_packages.sh --with-valid-packages --skip-external-srcs --install-drivers 
+./valid/get_packages.sh -k  --with-valid-packages --skip-external-srcs --install-drivers 
+#./valid/hudson/build.rb  --artifacts=${ARTIFACT_PATH}  --build_type=Release  --branch=${INTEGRATION_BRANCH}  
+

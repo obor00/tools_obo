@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#git clean -ffdx && git submodule foreach --recursive git clean -ffdx
+
+export INTEGRATION_BRANCH=dev/obordes/tmp
+mkdir artifacts
+export ARTIFACT_PATH=$(pwd)/artifacts
+
+./valid/get_packages.sh
+./valid/check.sh
+source workspace/kEnv/kvxtools/.switch_env
+export TOP_WORKSPACE=$(pwd)
+export BR2_DL_DIR=${TOP_WORKSPACE}/../br2_dl_dir/
+./valid/hudson/build.rb  --artifacts=${ARTIFACT_PATH}  --build_type=Release  --branch=${INTEGRATION_BRANCH}
+./metabuild/bin/packages.rb --tar=${ARTIFACT_PATH}/package.tar tar 
+./valid/hudson/build.rb  --artifacts=${ARTIFACT_PATH} report_perf
